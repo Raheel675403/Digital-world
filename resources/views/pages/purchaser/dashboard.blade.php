@@ -1,9 +1,12 @@
 @extends('layouts.app_layout')
-
+@section('background', 'https://cdn.nimbusthemes.com/2017/09/09233300/rsz_1free_nature_backgrounds_-_rose_petals_by_stocksnapio1-768x509.jpg') {{-- change per page --}}
 @section('content')
+{{--    <video autoplay muted loop id="myVideo">--}}
+{{--        <source src="{{asset('background-video/river.mp4')}}" type="video/mp4">--}}
+{{--    </video>--}}
     <main class="app-main">
         <!-- Content Header -->
-        <div class="app-content-header bg-dark">
+        <div class="app-content-header dashboard-header bg-dark">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6">
@@ -24,10 +27,9 @@
         <div class="app-content py-3">
             <div class="container-fluid">
                 <div class="row g-4">
-
                     <!-- Card 1 -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white bg-primary" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/views-image.jpg'); background-size: cover;">
+                        <div class="card dcard shadow-lg text-white bg-primary" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/views-image.jpg'); background-size: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Recent Activity Insights</h5>
@@ -41,7 +43,7 @@
                     <!-- Card 2 -->
                     <!-- Card: Purchase View -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white bg-dark" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/purchase-image.jpg'); background-size: cover;">
+                        <div class="card dcard shadow-lg text-white bg-dark" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/purchase-image.jpg'); background-size: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Purchase Coins</h5>
@@ -55,20 +57,20 @@
 
                     <!-- Card 3 -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white bg-success" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/apply-view-image.jpg'); background-size: cover;">
+                        <div class="card dcard shadow-lg text-white bg-success" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/apply-view-image.jpg'); background-size: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
-                                    <h5 class="fw-bold">Apply Views</h5>
-                                    <p>Click below to apply views and boost engagement.</p>
+                                    <h5 class="fw-bold">Apply Coins</h5>
+                                    <p>Click below to apply coin on you video and boost engagement.</p>
                                 </div>
-                                <a href="#" class="btn btn-light btn-sm rounded-pill text-success fw-bold">Apply Now <i class="bi bi-arrow-right"></i></a>
+                                <a href="{{ route('apply-video') }}" class="btn btn-light btn-sm rounded-pill text-success fw-bold">Apply Now <i class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 4 -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white bg-info" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/chat-image.jpg'); background-size: cover;">
+                        <div class="card dcard shadow-lg text-white bg-info" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/chat-image.jpg'); background-size: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Chat with Us</h5>
@@ -81,7 +83,7 @@
 
                     <!-- Card 5 -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white bg-warning" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/notifications-image.jpg'); background-size: cover;">
+                        <div class="card dcard shadow-lg text-white bg-warning" style="border-radius: 15px; height: 250px; background-image: url('path/to/your/notifications-image.jpg'); background-size: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Notifications</h5>
@@ -93,20 +95,24 @@
                     </div>
 
                     <!-- Card 6: Profile -->
-                    <div class="col-lg-4 col-md-6 d-flex">
-                        <div class="card shadow-lg bg-secondary text-white w-100" style="border-radius: 15px; background-image: url('path/to/your/profile-background.jpg'); background-size: cover;">
+                    <!-- Card 6: Profile -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card dcard shadow-lg bg-secondary text-white w-100"
+                             style="border-radius: 15px; height: 250px; background-image: url('path/to/your/profile-background.jpg'); background-size: cover;">
                             <div class="card-body text-center d-flex flex-column justify-content-between">
-                                <img src="https://i.pravatar.cc/100?img=3" class="rounded-circle mx-auto mb-3" alt="Profile" style="width: 100px; height: 100px; border: 3px solid #fff;">
+                                <img src="https://i.pravatar.cc/100?img=3" class="rounded-circle mx-auto mb-2"
+                                     alt="Profile" style="width: 100px; height: 100px; border: 3px solid #fff;">
                                 <div>
-                                    <h5 class="fw-bold">John Doe</h5>
-                                    <p>Software Developer</p>
+                                    <h5 class="fw-bold mb-1">John Doe</h5>
+                                    <p class="mb-1">Software Developer</p>
                                     <small class="text-light">Joined: January 2022</small>
                                 </div>
-                                <a href="#" class="btn btn-light btn-sm mt-3 rounded-pill text-secondary fw-bold">View Profile <i class="bi bi-arrow-right"></i></a>
+                                <a href="#" class="btn btn-light btn-sm mt-2 rounded-pill text-secondary fw-bold">
+                                    View Profile <i class="bi bi-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-
                 </div> <!-- /row -->
             </div> <!-- /container-fluid -->
         </div> <!-- /app-content -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\PurchaserDetail;
 use App\Models\videoDetails;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -77,6 +78,20 @@ class PurchaseController extends Controller
             if($data->save()){
                 return back()->with('success','Your request has been successfully applied.Please wait a moment and then check the video.');
             }
+        }
+    }
+    public function purchaseCoin(Request $request){
+        if (Auth::check()){
+            $request->validate([
+                'amount' => "required|integer"
+            ]);
+            $data = new PurchaserDetail();
+            $data->user_id = auth()->user()->id;
+            $data->coin = $request->amount;
+            if($data->save()){
+                return back()->with('success','you have purchase'." ".$request->amount."  ".'coin');
+            }
+
         }
     }
 

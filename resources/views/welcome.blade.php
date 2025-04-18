@@ -19,22 +19,27 @@
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
-<!-- Navbar -->
-<header class="bg-white shadow-md fixed top-0 left-0 right-0 ">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+<header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="w-full px-6 py-4 flex justify-between items-center">
+        <!-- Left: Logo and Title -->
         <div class="flex items-center gap-3">
             <img src="https://img.freepik.com/premium-vector/modern-digital-futuristic-hexagon-world-globe-link-network-internet-logo-design_358185-214.jpg" alt="Logo" class="w-10 h-10" />
             <h1 class="text-2xl font-bold text-indigo-700">DigitalWorld</h1>
         </div>
+
+        <!-- Right: Navigation Links -->
         <nav class="space-x-6">
             <a href="#docs" class="text-gray-700 hover:text-indigo-600 font-medium">Docs</a>
             <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
             <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">About us</a>
             <a href="@if(auth()->user()) {{route('dashboard')}} @else {{route('login')}} @endif"
-            class="text-gray-700 hover:text-indigo-600 font-medium"> @if(auth()->user()) Dashboard @else Log in @endif</a>
+               class="text-gray-700 hover:text-indigo-600 font-medium">
+                @if(auth()->user()) Dashboard @else Log in @endif
+            </a>
         </nav>
     </div>
 </header>
+
 
 <!-- Spacer for fixed header -->
 <div class="h-20"></div>
@@ -70,7 +75,7 @@
 
 <!-- Footer -->
 <footer id="smart-footer" class="bg-white border-t fixed bottom-0 left-0 right-0 footer-hidden z-40">
-    <div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-700">
+    <div class="w-100 mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-700">
         <!-- Developer Info with Photo -->
         <div class="flex items-center space-x-4">
             <img src="https://i.pravatar.cc/100?img=3" alt="Developer" class="w-14 h-14 rounded-full border-2 border-indigo-500 shadow" />

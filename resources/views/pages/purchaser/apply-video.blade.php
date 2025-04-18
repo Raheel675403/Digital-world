@@ -1,4 +1,5 @@
 @extends('layouts.app_layout')
+@section('background', 'https://cdn.nimbusthemes.com/2017/09/09233341/Free-Nature-Backgrounds-Seaport-During-Daytime-by-Pexels.jpeg') {{-- change per page --}}
 @section('content')
     <div class="container mt-5">
         <div class="card bg-dark text-white shadow-lg rounded-4">
@@ -8,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-12 d-flex items-baseline justify-content-between">
                         <h4 class="fw-bold">Apply Coins</h4>
-                        <button class="btn btn-md btn-outline-info"> Purchase View</button>
+                        <a href="{{ route('purchase-coins') }}" class="btn btn-md btn-outline-info"> Purchase View</a>
                         </div>
                     </div>
                     <h6 class="fw-bold mt-3">Hello Raheel</h6>

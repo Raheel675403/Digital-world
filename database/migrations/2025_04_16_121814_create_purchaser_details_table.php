@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // Define the user_id column as an unsigned big integer
             $table->foreign('user_id')->references('id')->on('Users'); // Foreign key constraint
-            $table->string('video_url')->nullable();
-            $table->string('apply_views')->nullable();
+            $table->string('coin')->nullable();
             $table->timestamps();
         });
 
