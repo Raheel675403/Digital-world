@@ -5,3 +5,11 @@
 .box-shadow{
     box-shadow: 10px 15px 15px #554d4d;
 }
+.fl-wrapper{
+    margin-top: 38px !important;
+    width: auto !important;
+}
+.fl-content{
+    display: flex !important;
+    flex-direction: row !important;
+}

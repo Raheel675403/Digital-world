@@ -53,4 +53,7 @@ class User extends Authenticatable
     public function purchaserDetail(){
         return $this->hasOne(PurchaserDetail::class);
     }
+    public function videoDetail(){
+        return $this->hasMany(videoDetails::class);
+    }
 }

@@ -30,47 +30,47 @@
                         </button>
                     </div>
                 </form>
+                <form action="{{route('save-request-video')}}" id="saveVideoDetailForm" method="POST">
+                    @csrf
                     {{-- fetch vedio with ajax--}}
-                <div id="video-preview" class="row mt-5" style="display: none;">
-                    <!-- Video Iframe -->
-                    <div class="col-md-4">
-                        <div class="ratio mt-4 ratio-16x9 rounded shadow">
-                            <iframe id="video-frame" height="100px" src="" allowfullscreen></iframe>
-                        </div>
-                    </div>
-
-                    <!-- Video Info in Readonly Inputs -->
-                    <div class="col-md-4 mb-3">
-                        <div class="mb-3">
-                            <label class="form-label text-light fw-bold">Channel Name</label>
-                            <input type="text" readonly class="form-control bg-secondary text-white border-0" id="channel">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label text-light fw-bold">Views</label>
-                                <input type="text" readonly class="form-control bg-secondary text-white border-0" id="viewer">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label text-light fw-bold"> Likes</label>
-                                <input type="text" readonly class="form-control bg-secondary text-white border-0" id="like">
+                    <div id="video-preview" class="row mt-5" style="display: none;">
+                        <!-- Video Iframe -->
+                        <input type="hidden" id="video_src" name="video_url">
+                        <div class="col-md-4">
+                            <div class="ratio mt-4 ratio-16x9 rounded shadow">
+                                <iframe id="video-frame" height="100px" src="" allowfullscreen></iframe>
                             </div>
                         </div>
-                        <div>
-                            <label class="form-label text-light fw-bold">Video Title</label>
-                            <textarea type="text" readonly class="form-control bg-secondary text-white border-0" id="title"></textarea>
-                        </div>
+                            <!-- Video Info in Readonly Inputs -->
+                            <div class="col-md-4 mb-3">
+                                <div class="mb-3">
+                                    <label class="form-label text-light fw-bold">Channel Name</label>
+                                    <input type="text" readonly name="channel_name" class="form-control bg-secondary text-white border-0" id="channel">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light fw-bold">Views</label>
+                                        <input type="text" readonly name="previous_views" class="form-control bg-secondary text-white border-0" id="viewer">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label text-light fw-bold"> Likes</label>
+                                        <input type="text" readonly name="likes" class="form-control bg-secondary text-white border-0" id="like">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="form-label text-light fw-bold">Video Title</label>
+                                    <textarea type="text" readonly name="title" class="form-control bg-secondary text-white border-0" id="title"></textarea>
+                                </div>
 
+                            </div>
+                            <!-- View Request Form -->
+                            <div class="col-md-4">
+                                <p class="fw-bold text-white">How many views do you want on this video?</p>
+                                <input type="number" class="form-control mb-2" id="num-view" name="apply_views" placeholder="e.g. 5000">
+                                <button type="button" id="apply-confirm" class="btn btn-outline-info w-100 mt-3" data-dismiss="modal" aria-label="Close">Apply</button>
+                            </div>
                     </div>
-
-                    <!-- View Request Form -->
-                    <div class="col-md-4">
-                        <p class="fw-bold text-white">How many views do you want on this video?</p>
-                        <form>
-                            <input type="number" class="form-control mb-2" id="num-view" name="views" placeholder="e.g. 5000">
-                            <button type="button" id="apply-confirm" class="btn btn-outline-info w-100 mt-3" data-dismiss="modal" aria-label="Close">Apply</button>
-                        </form>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
 
                 <!-- Modal Footer -->
                 <div class="modal-footer border-secondary sticky-bottom bg-dark flex-column">
-                    <button type="button" class="btn btn-outline-success rounded-pill w-100">
+                    <button type="button" id="saveVideoDetail" class="btn btn-outline-success rounded-pill w-100">
                         Yes &amp; Apply
                     </button>
                     <button type="button" id="cancelconfirmviewmodel" class="btn btn-outline-light rounded-pill w-100 mb-2" data-dismiss="modal">
@@ -115,63 +115,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{ asset('js/purchase.js') }}"></script>
     <script>
         const requestVideoURL = "{{ route('request-video') }}";
     </script>
-    <script src="{{ asset('js/purchase.js') }}"></script>
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            $('#request-video-form').on('submit', function (e) {--}}
-{{--                e.preventDefault();--}}
-{{--                $.ajax({--}}
-{{--                    url: "{{ route('request-video') }}",--}}
-{{--                    type: 'POST',--}}
-{{--                    data: {--}}
-{{--                        url: $('#url').val(),--}}
-{{--                        _token: "{{ csrf_token() }}"--}}
-{{--                    },--}}
-{{--                    success: function (response) {--}}
-{{--                        if (response.status === 'success') {--}}
-{{--                            $('#video-preview').show();--}}
-{{--                            $('#video-frame').attr('src' , response.embed_url);--}}
-{{--                            $('#title').val((response.title || 'Unknown Title'));--}}
-{{--                            $('#channel').val((response.channel || 'Unknown Channel'));--}}
-{{--                            $('#like').val((response.like || 'N/A'));--}}
-{{--                            $('#viewer').val((response.views || 'N/A'));--}}
-{{--                            $('#modal-title-preview').text(" "+(response.title || 'Unknown Title'))--}}
-{{--                            $('#modal-channel-preview').text(" " +(response.channel || 'Unknown Channel'));--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    error: function (xhr, status, error) {--}}
-{{--                        console.log("XHR Status:", status);--}}
-{{--                        console.log("AJAX Error:", error);--}}
-{{--                        console.log("Server Response:", xhr.responseText); // 👈 Yeh zaroori hai--}}
-{{--                        alert("Something went wrong. Check console for details.");--}}
-{{--                    }--}}
-
-{{--                });--}}
-{{--            });--}}
-{{--            $('#apply-confirm').click(function(e){--}}
-{{--                e.preventDefault();--}}
-
-{{--                let views = $('#num-view').val().trim();--}}
-
-{{--                if (views === '' || views === null || views === '0') {--}}
-{{--                    alert('Please enter a valid number of views.');--}}
-{{--                    return; // Don’t open modal--}}
-{{--                }--}}
-
-{{--                // If input is valid, open modal--}}
-{{--                $('#modal-views-preview').text(views); // Update value inside modal--}}
-{{--                $('#applyModal').modal('show');--}}
-
-{{--            });--}}
-{{--            $('body').on('click', '#closeconfirmviewmodel, #cancelconfirmviewmodel', function () {--}}
-{{--                $('#applyModal').modal('hide');--}}
-{{--            });--}}
-
-{{--        });--}}
-
-{{--    </script>--}}
-
 @endsection

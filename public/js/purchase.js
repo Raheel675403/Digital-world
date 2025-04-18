@@ -34,6 +34,7 @@ $(document).ready(function () {
 
         });
     });
+    // confirm modal open
     $('#apply-confirm').click(function(e){
         e.preventDefault();
 
@@ -49,8 +50,18 @@ $(document).ready(function () {
         $('#applyModal').modal('show');
 
     });
+    // modal hide click on cancel button
     $('body').on('click', '#closeconfirmviewmodel, #cancelconfirmviewmodel', function () {
         $('#applyModal').modal('hide');
     });
 
+    // form save vedio detail on database
+    $('#saveVideoDetail').click(function (){
+        $('#saveVideoDetailForm').submit();
+    });
+
+    $('#apply-confirm').click(function () {
+        let iframeSrc = $('#video-frame').attr('src'); // Get iframe src
+        $('#video_src').val(iframeSrc); // Set it to hidden input correctly
+    });
 });

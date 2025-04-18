@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\videoDetails;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,23 @@ class PurchaseController extends Controller
                 'video_id' => $video['id'],
                 'embed_url' => "https://www.youtube.com/embed/" . $video['id'],
             ]);
+        }
+    }
+    public function saveRequestVideo(Request $request){
+        if(Auth::check()){
+            $request->validate([
+                'channel_name'=>'required',
+               'apply_views'=>'required|integer'
+            ]);
+            $data = new videoDetails();
+            $data->user_id          = auth()->user()->id;
+            $data->channel_name     = $request->channel_name;
+            $data->previous_views   = $request->previous_views;
+            $data->url              = $request->video_url;
+            $data->apply_views      = $request->apply_views;
+            if($data->save()){
+                return back()->with('success','Your request has been successfully applied.Please wait a moment and then check the video.');
+            }
         }
     }
 
