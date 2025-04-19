@@ -51,7 +51,7 @@ class User extends Authenticatable
         ];
     }
     public function purchaserDetail(){
-        return $this->hasOne(PurchaserDetail::class);
+        return $this->hasMany(PurchaserDetail::class);
     }
     public function videoDetail(){
         return $this->hasMany(videoDetails::class);
