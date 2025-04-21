@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\PurchaserDetail;
+use App\Models\User;
 use App\Models\videoDetails;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -75,8 +76,27 @@ class PurchaseController extends Controller
             $data->previous_views   = $request->previous_views;
             $data->url              = $request->video_url;
             $data->apply_views      = $request->apply_views;
-            if($data->save()){
-                return back()->with('success','Your request has been successfully applied.Please wait a moment and then check the video.');
+            if($data->apply_views){
+                $loginuser          = User::where('id', auth()->id())->first();
+                if($loginuser->has_coins > 0){
+                    $demond = $request->apply_views;
+                    if($demond <= $loginuser->has_coins ){
+                        $has_coin = $loginuser->has_coins - $data->apply_views;
+                        $loginuser->has_coins = $has_coin;
+                        if ($loginuser->save()){
+                            if($data->save()){
+                                return to_route('dashboard')->with('success','Your request has been successfully applied.Please wait a moment and then check the video.');
+                            }
+                        }else{
+                            return back()->with('error', 'Oops! Something went wrong. Please try again shortly.');
+                        }
+
+                    }else{
+                        return back()->with('error', 'Oops! You don’t have enough coins to continue. You currently have only ' . $loginuser->has_coins . ' coin(s). Please purchase more coins to enjoy full access!');
+                    }
+                }else{
+                    return back()->with('error', 'Oops! You don’t have enough coins to continue. You currently have only ' . $loginuser->has_coins . ' coin(s). Please purchase more coins to enjoy full access!');
+                }
             }
         }
     }
@@ -85,11 +105,23 @@ class PurchaseController extends Controller
             $request->validate([
                 'amount' => "required|integer"
             ]);
-            $data = new PurchaserDetail();
-            $data->user_id = auth()->user()->id;
-            $data->coin = $request->amount;
+            $loginuser                  = User::where('id', auth()->id())->with('purchaserDetail')->first();
+            $purchase_data              = $loginuser->purchaserDetail;
+            $total_coin                 = $purchase_data->sum('coin');
+            $data=[
+                'user'                  => $loginuser,
+                'purchase_data'         => $purchase_data,
+                'total_coin'            => $total_coin
+            ];
+            $data                       = new PurchaserDetail();
+            $data->user_id              = auth()->user()->id;
+            $data->coin                 = $request->amount;
             if($data->save()){
+                $has_coins              = $request->amount +  $total_coin;
+                $loginuser->has_coins    = $has_coins;
+                if($loginuser->save()){
                 return back()->with('success','you have purchase'." ".$request->amount."  ".'coin');
+                }
             }
 
         }

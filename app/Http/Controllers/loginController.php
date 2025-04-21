@@ -32,11 +32,9 @@ class loginController extends Controller
             if($user === 'purchase'){
                 $loginuser          = User::where('id', auth()->id())->with('purchaserDetail')->first();
                 $purchase_data      = $loginuser->purchaserDetail;
-                $total_coin         = $purchase_data->sum('coin');
                 $data=[
                   'user'            => $loginuser,
                   'purchase_data'   => $purchase_data,
-                  'total_coin'      => $total_coin
                 ];
                 return view('pages.purchaser.dashboard',compact('data'))->with('success',"Welcome your are successfully logged in");
             }else{

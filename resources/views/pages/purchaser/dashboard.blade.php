@@ -36,7 +36,7 @@
                                         <h5 class="fw-bold mb-1">Account Balance</h5>
                                         <span class="badge bg-light text-dark fw-bold px-3 py-1">Updated</span>
                                     </div>
-                                    <h1 class="fw-bolder my-2" style="font-size: 2.5rem;">{{ 1000 }} <small style="font-size: 1.2rem;">Coins</small></h1>
+                                    <h1 class="fw-bolder my-2" style="font-size: 2.5rem;">{{ $data['user']->has_coins }} <small style="font-size: 1.2rem;">Coins</small></h1>
                                     <p class="text-light mb-0" style="opacity: 0.9;">You can use your coins to promote your content, unlock features, and more.</p>
                                 </div>
                                 <div class="text-end">
