@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('purchaser_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); // Define the user_id column as an unsigned big integer
-            $table->foreign('user_id')->references('id')->on('Users'); // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users'); // Foreign key constraint
             $table->string('coin')->nullable();
             $table->timestamps();
         });
