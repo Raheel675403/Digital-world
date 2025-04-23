@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-12 d-flex items-baseline justify-content-between">
                             <h4 class="fw-bold">History</h4>
-                            <a href="{{ route('dashboard') }}" class="btn btn-md btn-outline-info"> Purchase View</a>
+                            <a href="{{ route('dashboard') }}" class="btn btn-md btn-outline-info"> Dashboard</a>
                         </div>
                     </div>
                     <h6 class="fw-bold mt-3">Hello {{ $user->name }}</h6>
