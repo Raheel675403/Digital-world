@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use \App\Http\Controllers\loginController;
 use \App\Http\Controllers\PurchaseController;
+use \App\Http\Controllers\HistoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,5 +21,4 @@ Route::Post('purchase/coins',[PurchaseController::class,'purchaseCoin'])->name('
 Route::get('apply/video',[PurchaseController::class,'applyVideo'])->name('apply-video');
 Route::any('request/video',[PurchaseController::class,'requestVideo'])->name('request-video');
 Route::any('save/video/detail',[PurchaseController::class,'saveRequestVideo'])->name('save-request-video');
-//Route::get('dashboard/viewer',[loginController::class,'dashboard'])->name('dashboard.viewer');
-//Route::get('dashboard/purchase',[loginController::class,'dashboard'])->name('dashboard.purchaser');
+Route::get('video/history',[HistoryController::class,'applyVideoHistory'])->name('video-history');
