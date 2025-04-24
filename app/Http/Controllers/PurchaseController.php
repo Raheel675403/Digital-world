@@ -125,10 +125,28 @@ class PurchaseController extends Controller
             'success_url' => route('coin.success') . '?session_id={CHECKOUT_SESSION_ID}&coins=' . $coinAmount,
             'cancel_url' => route('dashboard'),
         ]);
-
+        dd($session);
         return redirect($session->url);
     }
+    public function success(Request $request)
+    {
+        if (!Auth::check()) return redirect('/login');
 
+        $session = \Stripe\Checkout\Session::retrieve($request->get('session_id'));
+        $amountTotal = $session->amount_total; // paisa
+        $coins = $amountTotal / 10; // coin price logic
+
+        $user = auth()->user();
+        $purchaseData = new PurchaserDetail();
+        $purchaseData->user_id = $user->id;
+        $purchaseData->coin = $coins;
+        $purchaseData->save();
+
+        $user->has_coins += $coins;
+        $user->save();
+
+        return redirect()->route('dashboard')->with('success', "You have purchased {$coins} coins.");
+    }
 
 
 }
