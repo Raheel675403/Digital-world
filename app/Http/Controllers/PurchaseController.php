@@ -106,14 +106,16 @@ class PurchaseController extends Controller
         $coinAmount = $request->amount;
         $pricePerCoin = 10; // 100 paisa = 1 INR
         $totalAmount = $coinAmount * $pricePerCoin;
-
+        if ($totalAmount < 150) {
+            return redirect()->back()->with('error', 'Minimum payment must be at least PKR 150.');
+        }
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $session = Session::create([
+        $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'pkr',
+                    'currency' => 'usd',
                     'product_data' => [
                         'name' => $coinAmount . ' Coins',
                     ],
@@ -125,7 +127,6 @@ class PurchaseController extends Controller
             'success_url' => route('coin.success') . '?session_id={CHECKOUT_SESSION_ID}&coins=' . $coinAmount,
             'cancel_url' => route('dashboard'),
         ]);
-        dd($session);
         return redirect($session->url);
     }
     public function success(Request $request)
