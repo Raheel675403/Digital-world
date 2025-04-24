@@ -10,6 +10,8 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {
@@ -101,6 +103,32 @@ class PurchaseController extends Controller
         }
     }
     public function purchaseCoin(Request $request){
+        $coinAmount = $request->amount;
+        $pricePerCoin = 10; // 100 paisa = 1 INR
+        $totalAmount = $coinAmount * $pricePerCoin;
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'inr',
+                    'product_data' => [
+                        'name' => $coinAmount . ' Coins',
+                    ],
+                    'unit_amount' => $totalAmount,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('coin.success') . '?session_id={CHECKOUT_SESSION_ID}&coins=' . $coinAmount,
+            'cancel_url' => url('dashboard'),
+        ]);
+
+        return redirect($session->url);
+    }
+    public function success(Request $request){
         if (Auth::check()){
             $request->validate([
                 'amount' => "required|integer"
