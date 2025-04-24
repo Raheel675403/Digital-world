@@ -5,7 +5,9 @@ use App\Http\Controllers\RegisterController;
 use \App\Http\Controllers\loginController;
 use \App\Http\Controllers\PurchaseController;
 use \App\Http\Controllers\HistoryController;
-
+use Illuminate\Support\Facades\Log;
+use Laravel\Cashier\Http\Controllers\WebhookController;
+use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +24,8 @@ Route::get('apply/video',[PurchaseController::class,'applyVideo'])->name('apply-
 Route::any('request/video',[PurchaseController::class,'requestVideo'])->name('request-video');
 Route::any('save/video/detail',[PurchaseController::class,'saveRequestVideo'])->name('save-request-video');
 Route::get('video/history',[HistoryController::class,'applyVideoHistory'])->name('video-history');
+
+Route::post(
+    '/stripe/webhook',
+    [WebhookController::class, 'handleWebhook']
+)->name('cashier.webhook');
