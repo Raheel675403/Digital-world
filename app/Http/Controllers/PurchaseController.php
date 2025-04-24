@@ -102,24 +102,27 @@ class PurchaseController extends Controller
             }
         }
     }
-    public function purchaseCoin(Request $request){
+    public function purchaseCoin(Request $request)
+    {
         $coinAmount = $request->amount;
-        $pricePerCoin = 10; // 100 paisa = 1 INR
-        $totalAmount = $coinAmount * $pricePerCoin;
-        if ($totalAmount < 150) {
-            return redirect()->back()->with('error', 'Minimum payment must be at least PKR 150.');
-        }
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $pricePerCoin = 10; // 10 paisa per coin
+        $totalAmount = $coinAmount * $pricePerCoin; // paisa (not rupees)
 
-        $session = \Stripe\Checkout\Session::create([
+        if ($totalAmount < 150) {
+            return redirect()->back()->with('error', 'Minimum payment must be at least PKR 150 paisa (PKR 1.50).');
+        }
+
+        Stripe::setApiKey(config('services.stripe.secret')); // best practice
+
+        $session = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'pkr',
                     'product_data' => [
                         'name' => $coinAmount . ' Coins',
                     ],
-                    'unit_amount' => $totalAmount,
+                    'unit_amount' => $totalAmount, // paisa (e.g., 100 paisa = PKR 1)
                 ],
                 'quantity' => 1,
             ]],
@@ -127,15 +130,19 @@ class PurchaseController extends Controller
             'success_url' => route('coin.success') . '?session_id={CHECKOUT_SESSION_ID}&coins=' . $coinAmount,
             'cancel_url' => route('dashboard'),
         ]);
+
         return redirect($session->url);
     }
+
     public function success(Request $request)
     {
         if (!Auth::check()) return redirect('/login');
 
-        $session = \Stripe\Checkout\Session::retrieve($request->get('session_id'));
-        $amountTotal = $session->amount_total; // paisa
-        $coins = $amountTotal / 10; // coin price logic
+        Stripe::setApiKey(config('services.stripe.secret'));
+        $session = Session::retrieve($request->get('session_id'));
+        $amountTotal = $session->amount_total;
+
+        $coins = $amountTotal / 10; // 10 paisa per coin
 
         $user = auth()->user();
         $purchaseData = new PurchaserDetail();
@@ -148,6 +155,7 @@ class PurchaseController extends Controller
 
         return redirect()->route('dashboard')->with('success', "You have purchased {$coins} coins.");
     }
+
 
 
 }
