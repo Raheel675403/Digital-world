@@ -113,7 +113,7 @@ class PurchaseController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
-                    'currency' => 'inr',
+                    'currency' => 'pkr',
                     'product_data' => [
                         'name' => $coinAmount . ' Coins',
                     ],
@@ -123,33 +123,30 @@ class PurchaseController extends Controller
             ]],
             'mode' => 'payment',
             'success_url' => route('coin.success') . '?session_id={CHECKOUT_SESSION_ID}&coins=' . $coinAmount,
-            'cancel_url' => url('dashboard'),
+            'cancel_url' => route('dashboard'),
         ]);
 
         return redirect($session->url);
     }
-    public function success(Request $request){
-        if (Auth::check()){
-            $loginuser                  = User::where('id', auth()->id())->with('purchaserDetail')->first();
-            $purchase_data              = $loginuser->purchaserDetail;
-            $total_coin                 = $purchase_data->sum('coin');
-            $data=[
-                'user'                  => $loginuser,
-                'purchase_data'         => $purchase_data,
-                'total_coin'            => $total_coin
-            ];
-            $data                       = new PurchaserDetail();
-            $data->user_id              = auth()->user()->id;
-            $data->coin                 = $request->coins;
-            if($data->save()){
-                $has_coins              = $request->coins +  $total_coin;
-                $loginuser->has_coins    = $has_coins;
-                if($loginuser->save()){
-                return back()->with('success','you have purchase'." ".$request->amount."  ".'coin');
-                }
-            }
+    public function success(Request $request)
+    {
+        if (!Auth::check()) return redirect('/login');
 
-        }
+        $session = \Stripe\Checkout\Session::retrieve($request->get('session_id'));
+        $amountTotal = $session->amount_total; // paisa
+        $coins = $amountTotal / 10; // coin price logic
+
+        $user = auth()->user();
+        $purchaseData = new PurchaserDetail();
+        $purchaseData->user_id = $user->id;
+        $purchaseData->coin = $coins;
+        $purchaseData->save();
+
+        $user->has_coins += $coins;
+        $user->save();
+
+        return redirect()->route('dashboard')->with('success', "You have purchased {$coins} coins.");
     }
+
 
 }
