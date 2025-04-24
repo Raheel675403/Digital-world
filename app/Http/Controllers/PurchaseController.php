@@ -130,9 +130,6 @@ class PurchaseController extends Controller
     }
     public function success(Request $request){
         if (Auth::check()){
-            $request->validate([
-                'amount' => "required|integer"
-            ]);
             $loginuser                  = User::where('id', auth()->id())->with('purchaserDetail')->first();
             $purchase_data              = $loginuser->purchaserDetail;
             $total_coin                 = $purchase_data->sum('coin');
@@ -143,9 +140,9 @@ class PurchaseController extends Controller
             ];
             $data                       = new PurchaserDetail();
             $data->user_id              = auth()->user()->id;
-            $data->coin                 = $request->amount;
+            $data->coin                 = $request->coins;
             if($data->save()){
-                $has_coins              = $request->amount +  $total_coin;
+                $has_coins              = $request->coins +  $total_coin;
                 $loginuser->has_coins    = $has_coins;
                 if($loginuser->save()){
                 return back()->with('success','you have purchase'." ".$request->amount."  ".'coin');
