@@ -2,7 +2,7 @@
 @section('background', 'https://cdn.nimbusthemes.com/2017/09/09233341/Free-Nature-Backgrounds-Seaport-During-Daytime-by-Pexels.jpeg') {{-- change per page --}}
 @section('content')
     <div class="container mt-5">
-        <div class="card bg-dark text-white shadow-lg rounded-4">
+        <div class="card card1 bg-dark text-white shadow-lg rounded-4">
             <div class="card-body p-4">
                 {{--header--}}
                 <div class="mb-4">

@@ -3,7 +3,7 @@
 @section('content')
     <!-- Card: Purchase View -->
     <div class="col-lg-6 offset-sm-3 mt-5 col-sm-6">
-        <div class="card shadow-lg text-white bg-dark" style="border-radius: 15px;">
+        <div class="card card1 shadow-lg text-white bg-dark" style="border-radius: 15px;">
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
                     <h5 class="mb-4 fw-bold">Purchase Coins</h5>

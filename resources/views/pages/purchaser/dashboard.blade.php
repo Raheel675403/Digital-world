@@ -1,5 +1,5 @@
 @extends('layouts.app_layout')
-@section('background', 'https://cdn.nimbusthemes.com/2017/09/09233300/rsz_1free_nature_backgrounds_-_rose_petals_by_stocksnapio1-768x509.jpg') {{-- change per page --}}
+@section('background-color', 'linear-gradient(135deg, #1d2b64, #f8cdda)')
 @section('content')
 {{--    <video autoplay muted loop id="myVideo">--}}
 {{--        <source src="{{asset('background-video/river.mp4')}}" type="video/mp4">--}}
@@ -29,7 +29,7 @@
                 <div class="row g-4">
                     <!-- Card 1 -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #1d2b64, #f8cdda); background-size: cover; background-blend-mode: overlay;">
+                        <div class="card card1 shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #1d2b64, #f8cdda); background-size: cover; background-blend-mode: overlay;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center">
@@ -49,7 +49,7 @@
 
                     <!-- Card 2: Purchase Coins -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #020024, #090979 , #0486CC , #02B3EA , #020024);">
+                        <div class="card card1 shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #020024, #090979 , #0486CC , #02B3EA , #020024);">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Purchase Coins</h5>
@@ -64,7 +64,7 @@
 
                     <!-- Card 3: Apply Coins -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #00c6ff, #0072ff);">
+                        <div class="card card1 shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #00c6ff, #0072ff);">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Apply Coins</h5>
@@ -79,7 +79,7 @@
 
                     <!-- Card 4: Chat with Us -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #fc5c7d, #6a82fb);">
+                        <div class="card card1 shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(135deg, #fc5c7d, #6a82fb);">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Chat with Us</h5>
@@ -94,7 +94,7 @@
 
                     <!-- Card 5: Notifications -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(red, yellow);">
+                        <div class="card card1 shadow-lg text-white" style="border-radius: 15px; height: 250px; background: linear-gradient(red, yellow);">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
                                     <h5 class="fw-bold">Notifications</h5>
@@ -109,7 +109,7 @@
 
                     <!-- Card 6: Profile -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-lg text-white text-center" style="border-radius: 15px; height: 250px; background:linear-gradient(white, black);">
+                        <div class="card card1 shadow-lg text-white text-center" style="border-radius: 15px; height: 250px; background:linear-gradient(white, black);">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <img src="https://i.pravatar.cc/100?img=3" class="rounded-circle mx-auto mb-2"
                                      alt="Profile" style="width: 100px; height: 100px; border: 3px solid #fff;">

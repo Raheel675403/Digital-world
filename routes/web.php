@@ -25,3 +25,5 @@ Route::any('request/video',[PurchaseController::class,'requestVideo'])->name('re
 Route::any('save/video/detail',[PurchaseController::class,'saveRequestVideo'])->name('save-request-video');
 Route::get('video/history',[HistoryController::class,'applyVideoHistory'])->name('video-history');
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook'])->name('cashier.webhook');
+// viewer routes
+Route::view('show/video','pages.viewer.show-video');
