@@ -2,8 +2,21 @@
 @section('background-color', 'linear-gradient(135deg, #1d2b64, #f8cdda)')
 
 <style>
+    #videoContainer {
+        position: relative;
+        width: 1260px;
+        height: 360px;
+    }
 
-
+    #player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+    }
     .btn-container {
         position: absolute;
         bottom: 20px;
