@@ -18,7 +18,7 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
     'stripe' => [
-        'secret' => 'sk_test_51RH4vUR4RZ9O1ZFlLXSKzISb8jTkWJPazt70EBr6nhiplFWPZkXoZMuKeUdUWtKuOpPPAkh38Z404gEFUrg1ZqZN00nvGNm6LU',
+        'secret' => env('STRIPE_SECRET'),
     ],
 
     'ses' => [
