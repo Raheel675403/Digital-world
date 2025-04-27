@@ -105,11 +105,11 @@ class PurchaseController extends Controller
     public function purchaseCoin(Request $request)
     {
         $coinAmount = $request->amount;
-        $pricePerCoin = 10; // 10 paisa per coin
+        $pricePerCoin = 100; // 10 paisa per coin
         $totalAmount = $coinAmount * $pricePerCoin; // paisa (not rupees)
 
-        if ($totalAmount < 150) {
-            return redirect()->back()->with('error', 'Minimum payment must be at least PKR 150 paisa (PKR 1.50).');
+        if ($totalAmount < 1) {
+            return redirect()->back()->with('error', 'Minimum payment must be at least PKR 1 paisa (PKR 1.50).');
         }
 
         Stripe::setApiKey(config('services.stripe.secret')); // best practice

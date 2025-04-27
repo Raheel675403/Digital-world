@@ -7,6 +7,7 @@ use \App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Log;
 use Laravel\Cashier\Http\Controllers\WebhookController;
 use Illuminate\Http\Request;
+use \App\Http\Controllers\viewerVideoController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,3 +28,6 @@ Route::get('video/history',[HistoryController::class,'applyVideoHistory'])->name
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook'])->name('cashier.webhook');
 // viewer routes
 Route::view('show/video','pages.viewer.show-video');
+Route::get('view/video',[viewerVideoController::class,'requestViewVideo'])->name('request-view-video');
+Route::Post('viewer/save/video', [viewerVideoController::class, 'viewerSaveVideo'])->name('viewer.save.video');
+
