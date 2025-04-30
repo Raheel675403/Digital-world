@@ -76,6 +76,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Modal conformation -->
         <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
