@@ -1,8 +1,9 @@
 @extends('layouts.app_layout')
 @section('background', 'https://cdn.nimbusthemes.com/2017/09/09233338/Free-Nature-Backgrounds-Sunset-by-Pixabay.jpg') {{-- change per page --}}
 @section('content')
-    <!-- Card: Purchase View -->
-    <div class="col-lg-6 offset-sm-3 mt-5 col-sm-6">
+    <main class="app-main">
+        <!-- Card: Purchase View -->
+        <div class="col-lg-6 offset-sm-3 mt-5 col-sm-6">
         <div class="card card1 shadow-lg text-white bg-dark" style="border-radius: 15px;">
             <div class="card-body d-flex flex-column justify-content-between">
                 <div>
@@ -19,5 +20,6 @@
             </div>
         </div>
     </div>
+    </main>
 
 @endsection

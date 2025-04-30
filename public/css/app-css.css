@@ -9055,10 +9055,13 @@ textarea.form-control-lg {
 }
 
 .bg-body-secondary {
-    --bs-bg-opacity: 1;
+    --bs-bg-opacity: 0.5;
     background-color: rgba(var(--bs-secondary-bg-rgb), var(--bs-bg-opacity)) !important;
 }
-
+.bg-body-secondary:hover{
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
+}
 .bg-body-tertiary {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-tertiary-bg-rgb), var(--bs-bg-opacity)) !important;
@@ -12995,7 +12998,7 @@ textarea.form-control-lg {
 .sidebar-brand {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:start;
     height: 3.5rem;
     padding: 0.8125rem 0.5rem;
     overflow: hidden;

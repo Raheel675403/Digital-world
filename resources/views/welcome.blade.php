@@ -45,11 +45,11 @@
 <div class="h-20"></div>
 
 <!-- Main Content -->
-<main class="flex-grow bg-gradient-to-br from-indigo-600 to-purple-700 text-white px-4 py-20">
+<main class="flex-grow bg-gradient-to-br from-indigo-600 to-purple-700 text-white px-4 py-20" style="background: linear-gradient(135deg, #020024, #090979 ,#00D4FF);">
     <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6">
+        <h3 class="text-3xl sm:text-4xl lg:text-6xl font-extrabold mb-6">
             Welcome to the World’s Best Platform
-        </h2>
+        </h3>
         <p class="text-lg sm:text-xl mb-10">
             Start your journey by choosing your account type.
         </p>

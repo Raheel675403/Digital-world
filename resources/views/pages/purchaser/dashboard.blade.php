@@ -10,14 +10,7 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <h3 class="text-white fw-bold mb-1" style="font-size: 2rem; letter-spacing: 1px;">Welcome to Your Dashboard</h3>
-                        <p class="text-white" style="font-size: 1.1rem;">Here's a summary of your recent activity and quick links to important sections.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <ol class="breadcrumb text-white float-end mb-0">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item text-white active">Dashboard</li>
-                        </ol>
+                        <h3 class="text-white mb-1" style="font-size:20px; letter-spacing: 1px;">Dashboard</h3>
                     </div>
                 </div>
             </div>
