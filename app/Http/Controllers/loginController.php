@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\ViewerAccountBalance;
+use App\Models\viewerVideoDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +31,8 @@ class loginController extends Controller
     public function dashboard(){
         if(auth::check()){
             $user = auth()->user()->user_type;
+            $viewer_Details = ViewerAccountBalance::where('user_id', \auth()->user()->id)->get();
+            $viewer_balance = $viewer_Details->sum('balance');
             if($user === 'purchase'){
                 $loginuser          = User::where('id', auth()->id())->with('purchaserDetail')->first();
                 $purchase_data      = $loginuser->purchaserDetail;
@@ -38,7 +42,7 @@ class loginController extends Controller
                 ];
                 return view('pages.purchaser.dashboard',compact('data'))->with('success',"Welcome your are successfully logged in");
             }else{
-                return view('pages.viewer.dashboard')->with('success',"Welcome your are successfully logged in");
+                return view('pages.viewer.dashboard',compact('viewer_balance'))->with('success',"Welcome your are successfully logged in");
             }
         }
     }

@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('viewer.video.history') }}" class="nav-link">
                             <i class="nav-icon bi bi-grip-horizontal"></i>
                             <p>View history</p>
                         </a>

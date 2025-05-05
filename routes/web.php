@@ -38,5 +38,6 @@ Route::middleware(viewer::class)->group(function (){
     Route::view('show/video','pages.viewer.show-video')->name('see.video');
     Route::get('view/video',[viewerVideoController::class,'requestViewVideo'])->name('request-view-video');
     Route::Post('viewer/save/video', [viewerVideoController::class, 'viewerSaveVideo'])->name('viewer.save.video');
+    Route::Get('viewer/video/history', [viewerVideoController::class, 'viewerVideoHistory'])->name('viewer.video.history');
 
 });

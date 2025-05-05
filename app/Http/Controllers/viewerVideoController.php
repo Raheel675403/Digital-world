@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\videoDetails;
+use App\Models\ViewerAccountBalance;
 use App\Models\viewerVideoDetail;
 use http\Env\Response;
 use http\Url;
@@ -46,7 +47,22 @@ class viewerVideoController extends Controller
             'video_url' => $videoUrl,
 //            'completed_at' => now(),
         ]);
+        $data = new ViewerAccountBalance();
+        $data->user_id = auth()->user()->id;
+        $data->balance  = 10;
+        $data->video_url  = $videoUrl;
+        $data->timestamps = now();
+        if($data->save()){
         return response()->json(['message' => 'Video completion recorded']);
+        }else{
+            return response()->json(['message' => 'Something want wrong please contact their team']);
+        }
+    }
+    public function viewerVideoHistory(){
+        if(Auth::check()){
+            $video = ViewerAccountBalance::where('user_id',\auth()->user()->id)->get();
+            return view('pages.viewer.view-video-history',compact('video'));
+        }
     }
 
 }

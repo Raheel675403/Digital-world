@@ -6,8 +6,8 @@
         <!-- Example Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <div class="bg-indigo-100 p-4 rounded shadow text-center">
-                <p class="text-lg font-semibold">Total Orders</p>
-                <p class="text-2xl text-indigo-700">25</p>
+                <p class="text-lg font-semibold">Total balance</p>
+                <p class="text-2xl text-indigo-700">{{ $viewer_balance }}</p>
             </div>
             <div class="bg-purple-100 p-4 rounded shadow text-center">
                 <p class="text-lg font-semibold">Messages</p>
