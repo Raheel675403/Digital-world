@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use \App\Http\Middleware\purchaser;
 use \App\Http\Controllers\viewerVideoController;
 use \App\Http\Middleware\viewer;
+use \App\Http\Controllers\chatControler;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -40,4 +41,10 @@ Route::middleware(viewer::class)->group(function (){
     Route::Post('viewer/save/video', [viewerVideoController::class, 'viewerSaveVideo'])->name('viewer.save.video');
     Route::Get('viewer/video/history', [viewerVideoController::class, 'viewerVideoHistory'])->name('viewer.video.history');
 
+});
+
+Route::middleware('auth')->group(function (){
+   Route::get('chat/{user}',[chatControler::class , 'show'])->name('chat');
+   Route::get('message/{user}',[chatControler::class , 'getMessage'])->name('getMessage');
+   Route::Post('message/{user}',[chatControler::class , 'sendMessage'])->name('sendMessage');
 });
